@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Tombola.BingoClient">
+<head>
+    <meta charset="UTF-8">
+    <title>Bingo Client</title>
+    <script src="thirdparty/bower_components/angular/angular.min.js"></script>
+    <script src="thirdparty/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+</head>
+<body>
+<div class="mainContent" ng-controller="loginController as logCrtl">
+    <h1>{{logCrtl.message}}</h1>
+    <button ng-click="logCrtl.login()">Login</button>
+    <button ng-click="logCrtl.logout()">Logout</button>
+</div>
+</body>
+<script src="scripts/app.js"></script>
+</html>
