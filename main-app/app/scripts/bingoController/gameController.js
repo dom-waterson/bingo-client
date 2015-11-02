@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.GameController')
-        .controller('gameController',['proxy', 'userModel', 'bingoModel', function (proxy, userModel, bingoModel) {
+        .controller('gameController',['$state', 'proxy', 'userModel', 'bingoModel', function ($state, proxy, userModel, bingoModel) {
             var me = this;
 
             me.nextGameTime = '';
@@ -11,6 +11,7 @@
                 proxy.nextGame(userModel.token).then(function (response) {
                     me.nextGameTime = response.payload.start;
                     me.ticketPrice = response.payload.ticketPrice + 'p';
+                    $state.go('playing');
                 });
             };
 

@@ -21,6 +21,9 @@
                 '</div>');
 
             $templateCache.put('bingoTicket.html',
-                '<h1>bingo Ticket</h1>');
+                '<bingo-ticket></bingo-ticket>'+
+                '<div ng-controller="loginController as logCrtl">' +
+                    '<button ng-click="logCrtl.logout()">Logout</button>' +
+                '</div>');
         }]);
 })();
