@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.BingoTicket')
-        .service(function () {
+        .service('bingoModel', function () {
             var me = this;
 
             me.ticket = '';

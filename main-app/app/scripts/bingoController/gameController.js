@@ -18,7 +18,6 @@
                 proxy.buyTicket(userModel.token, userModel.currentBalance, userModel.name).then(function (response) {
                     userModel.balance = response.payload.user.balance;
                     bingoModel.ticket = response.payload.card;
-                    //move to ticket state
                 });
             };
         }]);

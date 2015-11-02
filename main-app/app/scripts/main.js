@@ -5,5 +5,5 @@
     angular.module('Tombola.BingoClient.BingoTicket', []);
     angular.module('Tombola.BingoClient.LoginController', ['Tombola.BingoClient.Proxy', 'Tombola.BingoClient.UserModel']);
     angular.module('Tombola.BingoClient.GameController', ['Tombola.BingoClient.Proxy', 'Tombola.BingoClient.UserModel', 'Tombola.BingoClient.BingoTicket']);
-    angular.module('Tombola.BingoClient', ['Tombola.BingoClient.LoginController', 'Tombola.BingoClient.GameController']);
+    angular.module('Tombola.BingoClient', ['Tombola.BingoClient.LoginController', 'Tombola.BingoClient.GameController', 'ui.router']);
 })();
