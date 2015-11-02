@@ -1,0 +1,29 @@
+{
+  "name": "bingo-client",
+  "description": "Simple angular client app that consumes a game api",
+  "main": "index.js",
+  "authors": [
+    "Dom Waterson"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "less-css",
+    "html",
+    "api"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.7",
+    "angular-mocks": "~1.4.7",
+    "angular-ui-router": "~0.2.15"
+  }
+}

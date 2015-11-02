@@ -1,0 +1,57 @@
+{
+  "name": "bingo-client",
+  "version": "0.0.0",
+  "description": "Simple angular client app that consumes a game api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://domTombola@github.com/domTombola/Noughts-and-Crosses.git"
+  },
+  "keywords": [
+    "angular",
+    "less-css",
+    "html",
+    "api"
+  ],
+  "author": "Dom Waterson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/domTombola/bingo-client/issues"
+  },
+  "homepage": "https://github.com/domTombola/bingo-client",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  },
+  "devDependencies": {
+    "bower": "~1.5.2",
+    "grunt": "~0.4.5",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-copy": "~0.8.1",
+    "grunt-contrib-jshint": "~0.11.3",
+    "grunt-contrib-less": "~1.0.1",
+    "grunt-lesslint": "~1.3.0",
+    "jshint-stylish": "~2.0.1",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-express-server": "~0.5.1",
+    "express": "~4.13.3",
+    "morgan": "~1.6.1",
+    "karma": "~0.13.10",
+    "grunt-karma": "~0.12.1",
+    "grunt-mocha": "~0.4.13",
+    "mocha": "~2.3.3",
+    "karma-mocha": "~0.2.0",
+    "karma-chai-plugins": "~0.6.0",
+    "sinon-chai": "~2.8.0",
+    "chai": "~3.3.0",
+    "sinon": "~1.17.1",
+    "karma-chai-sinon": "~0.1.5",
+    "karma-nyan-reporter": "~0.2.2",
+    "phantomjs": "~1.9.18",
+    "karma-phantomjs-launcher": "~0.2.1",
+    "karma-chrome-launcher": "~0.2.1"
+  }
+}
