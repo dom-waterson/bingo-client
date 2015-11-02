@@ -17,6 +17,13 @@
     <button ng-click="logCrtl.login()">Login</button>
     <button ng-click="logCrtl.logout()">Logout</button>
 </div>
+
+<div ng-controller="gameController as game">
+    <button ng-click="game.nextGame()">Next Game</button>
+    <h2>{{game.nextGameTime}}</h2>
+    <h2>Ticket Price: {{game.ticketPrice}}</h2>
+    <button ng-click="game.buyTicket()">Buy Ticket</button>
+</div>
 </body>
 <script src="scripts/app.js"></script>
 </html>
