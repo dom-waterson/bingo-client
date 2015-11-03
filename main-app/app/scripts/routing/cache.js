@@ -4,8 +4,8 @@
         .run(['$templateCache', function($templateCache) {
             $templateCache.put('login.html',
                 '<div class="mainContent" ng-controller="loginController as logCrtl"> ' +
-                    '<input ng-model="logCrtl.userName" type="text">' +
-                    '<input ng-model="logCrtl.userPassword" type="password">' +
+                    '<input ng-model="logCrtl.userName" type="text"><br/>' +
+                    '<input ng-model="logCrtl.userPassword" type="password"><br/>' +
                     '<button ng-click="logCrtl.login()">Login</button> ' +
                 '</div>');
 

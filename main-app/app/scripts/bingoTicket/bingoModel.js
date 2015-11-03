@@ -82,7 +82,6 @@
 
             me.getTicket = function () {
                 splitingNumbersUp(me.ticket);
-                console.log(me.ticketGrid);
             };
         });
 })();

@@ -21,7 +21,6 @@
                     bingoModel.ticket = response.payload.card;
                     bingoModel.getTicket();
                     me.ticket = bingoModel.ticketGrid;
-                    console.log('ticket from controller: ' + me.ticket);
                     $state.go('playing');
                 });
             };
