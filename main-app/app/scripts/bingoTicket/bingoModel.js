@@ -6,11 +6,33 @@
 
             me.ticket = '';
 
-            me.ticketGrid = [
-                [null, null,null,null,null,null,null,null,null],
-                [null, null,null,null,null,null,null,null,null],
-                [null, null,null,null,null,null,null,null,null]
-            ];
+            var tickets = [];
+            me.bingoStrip = [];
+
+            var createBingoTicketGrid = function () {
+                me.ticketGrid = [
+                    [null, null,null,null,null,null,null,null,null],
+                    [null, null,null,null,null,null,null,null,null],
+                    [null, null,null,null,null,null,null,null,null]
+                ];
+            };
+
+            me.getTicket = function () {
+                generateTickets(me.ticket);
+                for(var i = 0; i < tickets.length; i++){
+                    createBingoTicketGrid();
+                    splitingNumbersUp(tickets[i]);
+                }
+            };
+
+            var generateTickets = function (ticket) {
+                var start = 0;
+                var end = 30;
+                for(start; start < ticket.length; start += 30){
+                    tickets.push(ticket.slice(start, end));
+                    end += 30;
+                }
+            };
 
             var splitingNumbersUp = function (strTicket) {
                 var numStart = 0;
@@ -20,6 +42,7 @@
                     numStart += 2;
                     numEnd += 2;
                 }
+                me.bingoStrip.push(me.ticketGrid);
             };
 
             var checkRowForFiveNumbers = function (row) {
@@ -78,10 +101,6 @@
                 if(numberFromString >= 80 &&  numberFromString < 90) {
                     insertNumberIntobingoTicket(8, numberFromString);
                 }
-            };
-
-            me.getTicket = function () {
-                splitingNumbersUp(me.ticket);
             };
         });
 })();
