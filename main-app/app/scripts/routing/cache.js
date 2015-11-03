@@ -10,7 +10,7 @@
                 '</div>');
 
             $templateCache.put('lobby.html',
-                '<div ng-controller="gameController as game"> ' +
+                '<div> ' +
                 '<button ng-click="game.nextGame()">Next Game</button> ' +
                 '<h2>{{game.nextGameTime}}</h2> ' +
                 '<h2>Ticket Price: {{game.ticketPrice}}</h2> ' +

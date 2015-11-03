@@ -6,12 +6,12 @@
 
             me.nextGameTime = '';
             me.ticketPrice = '';
+            me.ticket = [];
 
             me.nextGame = function () {
                 proxy.nextGame(userModel.token).then(function (response) {
                     me.nextGameTime = response.payload.start;
                     me.ticketPrice = response.payload.ticketPrice + 'p';
-                    $state.go('playing');
                 });
             };
 
@@ -19,6 +19,10 @@
                 proxy.buyTicket(userModel.token, userModel.currentBalance, userModel.name).then(function (response) {
                     userModel.balance = response.payload.user.balance;
                     bingoModel.ticket = response.payload.card;
+                    bingoModel.getTicket();
+                    me.ticket = bingoModel.ticketGrid;
+                    console.log('ticket from controller: ' + me.ticket);
+                    $state.go('playing');
                 });
             };
         }]);
