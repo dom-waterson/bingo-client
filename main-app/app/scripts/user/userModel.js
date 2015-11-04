@@ -6,11 +6,13 @@
             me.name = '';
             me.currentBalance = '';
             me.token = '';
+            me.ticketBought = false;
 
             me.clearUser = function (){
                 me.name = '';
                 me.currentBalance = '';
                 me.token = '';
+                me.ticketBought = false;
             };
         });
 })();

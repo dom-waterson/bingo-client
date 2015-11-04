@@ -10,14 +10,12 @@
                 '</div>');
 
             $templateCache.put('lobby.html',
-                '<div><h1>Balance: {{game.user.currentBalance | currency:"£": -2}}</h1>'+
+                '<div ng-init="game.nextGame()"><h1>Balance: {{game.user.currentBalance | currency:"£"}}</h1>'+
                     '<h1>Username: {{game.user.name}}</h1>' +
-                '<button ng-click="game.nextGame()">Next Game</button> ' +
-                '<h2>{{game.nextGameTime}}</h2> ' +
-                '<h2>Ticket Price: {{game.ticketPrice}}</h2> ' +
-                '<button ng-click="game.buyTicket()">Buy Ticket</button> ' +
-                '<div ng-controller="loginController as logCrtl">' +
                 '<button ng-click="logCrtl.logout()">Logout</button>' +
+                    '<h1>Time Till Next Game: {{nextGameModel.timeToGame}}</h1>'+
+                '<button ng-click="game.buyTicket()">Buy Ticket{{game.ticketPrice}}</button> ' +
+                '<div ng-controller="loginController as logCrtl">' +
                 '</div>' +
                 '</div>');
 

@@ -6,7 +6,7 @@
 
             me.ticket = '';
 
-            var tickets = [];
+            me.tickets = [];
             me.bingoStrip = [];
 
             var createBingoTicketGrid = function () {
@@ -19,9 +19,9 @@
 
             me.getTicket = function () {
                 generateTickets(me.ticket);
-                for(var i = 0; i < tickets.length; i++){
+                for(var i = 0; i < me.tickets.length; i++){
                     createBingoTicketGrid();
-                    splitingNumbersUp(tickets[i]);
+                    splitingNumbersUp(me.tickets[i]);
                 }
             };
 
@@ -29,7 +29,7 @@
                 var start = 0;
                 var end = 30;
                 for(start; start < ticket.length; start += 30){
-                    tickets.push(ticket.slice(start, end));
+                    me.tickets.push(ticket.slice(start, end));
                     end += 30;
                 }
             };
@@ -98,7 +98,7 @@
                 if(numberFromString >= 70 &&  numberFromString < 80) {
                     insertNumberIntobingoTicket(7, numberFromString);
                 }
-                if(numberFromString >= 80 &&  numberFromString < 90) {
+                if(numberFromString >= 80 &&  numberFromString <= 90) {
                     insertNumberIntobingoTicket(8, numberFromString);
                 }
             };
