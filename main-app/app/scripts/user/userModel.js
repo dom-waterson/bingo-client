@@ -4,13 +4,13 @@
         .service('userModel', function () {
             var me = this;
             me.name = '';
-            me.currentBalance = '';
+            me.currentBalance = 0;
             me.token = '';
             me.ticketBought = false;
 
             me.clearUser = function (){
                 me.name = '';
-                me.currentBalance = '';
+                me.currentBalance = 0;
                 me.token = '';
                 me.ticketBought = false;
             };

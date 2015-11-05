@@ -5,18 +5,18 @@
             var me = this;
 
             me.timeToGame = 0;
+            var gameLoop;
 
             me.startCounter = function (time) {
                 var currentDate = new Date();
                 var dateFromApi = new Date(time);
                 var timeDiff = Math.abs(dateFromApi.getTime() - currentDate.getTime());
                 me.timeToGame = (timeDiff/1000).toFixed(0);
-                $interval(me.updateTime, 1000, me.timeToGame);
+                gameLoop = $interval(me.updateTime, 1000, me.timeToGame);
             };
 
             me.updateTime = function () {
                 me.timeToGame -= 1;
-                console.log(me.timeToGame);
                 if(me.timeToGame === 0){
                     checkTicketPurchased();
                 }
@@ -32,6 +32,10 @@
                         me.startCounter(response.payload.start);
                     });
                 }
+            };
+
+            me.stop = function () {
+              $interval.cancel(gameLoop);
             };
         }]);
 })();
