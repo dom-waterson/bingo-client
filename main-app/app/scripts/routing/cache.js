@@ -30,6 +30,7 @@
                         '<h2 class="move">{{game.longPollingService.currentNumber}}</h2>'+
                         '<h2 class="move">{{game.longPollingService.winnerMessage}}</h2>' +
                         '<h2 class="move">Ball {{game.longPollingService.startNumber}} of 90</h2>' +
+                        '<h2>{{game.longPollingService.numbersToWin}} to go!</h2>'+
                     '</div>' +
                 '<bingo-ticket ng-init="game.longPollingService.startPolling()"></bingo-ticket>');
         }]);

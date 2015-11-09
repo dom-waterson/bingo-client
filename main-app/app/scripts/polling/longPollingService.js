@@ -1,11 +1,12 @@
 (function () {
     'use strict';
     angular.module('Tombola.LongPollingService')
-        .service('longPolling',['$timeout', 'proxy', 'userModel', function ($timeout, proxy, userModel) {
+        .service('longPolling',['$timeout', 'proxy', 'userModel', 'numberService', function ($timeout, proxy, userModel, numberService) {
             var me = this;
             me.currentNumber = 0;
             me.startNumber = 1;
             me.winnerMessage ='';
+            me.numbersToWin = 5;
             var winnerHasNotBeenFound = true;
 
             me.startPolling = function() {
@@ -13,14 +14,18 @@
                     me.currentNumber = response.payload.call;
                     me.startNumber += 1;
                     checkForWinnerfound(response);
+                    numberService.findNumberInTicket(me.currentNumber);
+                    me.numbersToWin = numberService.findHowManyNumberAreLeftForPrize();
+                    console.log(me.numbersToWin);
                     if(winnerHasNotBeenFound){
-                        $timeout(me.startPolling, 1000);
+                        $timeout(me.startPolling, 2000);
                     }
                 });
             };
 
             var checkForWinnerfound = function (data) {
                 if(data.message === "Line"){
+                    numberService.linePrize = false;
                     lineFound(data);
                 }
                 else if (data.message === 'Winner') {
