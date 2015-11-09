@@ -53,5 +53,11 @@
                 var data = {'gameId': 1, 'userId': userId, 'balance': balance};
                 return callApi(urlEndPoint, 'POST', data, token);
             };
+
+            me.getBingoNumber = function (token, userId, balance, call) {
+                var urlEndPoint = 'game/getcall';
+                var data = {"gameId":1, "userId":userId, "balance":balance, "callnumber":call};
+                return callApi(urlEndPoint, 'POST', data, token);
+            };
         }]);
 })();
