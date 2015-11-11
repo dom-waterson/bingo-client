@@ -10,9 +10,7 @@
                 proxy.login(me.userName, me.userPassword).then(function (response) {
                     if(response.message === 'LoginSuccess'){
                         userModel.token = response.payload.user.token;
-                        //userModel.currentBalance = response.payload.user.balance / 100;
                         userModel.currentBalance = response.payload.user.balance;
-                        //userModel.currentBalance = userModel.currentBalance / 100;
                         userModel.name = response.payload.user.username;
                         $state.go('lobby');
                     }

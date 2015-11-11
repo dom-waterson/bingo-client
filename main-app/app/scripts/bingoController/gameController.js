@@ -22,7 +22,6 @@
                         bingoModel.bingoStrip = [];
                         bingoModel.tickets = [];
                         userModel.currentBalance = response.payload.user.balance;
-                        //userModel.currentBalance -= 10;
                         userModel.ticketBought = true;
                         bingoModel.ticket = response.payload.card;
                         bingoModel.getTicket();
