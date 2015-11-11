@@ -26,12 +26,11 @@
                     '<button ng-click="logCrtl.logout()">Logout</button>' +
                     '<button ui-sref="lobby">Lobby</button>' +
                 '</div>' +
-                    '<div class="gameboard">' +
-                        '<h2 class="move">{{game.longPollingService.currentNumber}}</h2>'+
-                        '<h2 class="move">{{game.longPollingService.winnerMessage}}</h2>' +
-                        '<h2 class="move">Ball {{game.longPollingService.startNumber}} of 90</h2>' +
-                        '<h2>{{game.longPollingService.numbersToWin}} to go!</h2>'+
+                    '<div class="bingoPlayingInfo">' +
+                        '<h1 class="move">{{game.longPollingService.currentNumber}}</h1>'+
+                        '<h1 class="move pushRight">Ball {{game.longPollingService.startNumber}} of 90</h1>' +
                     '</div>' +
-                '<bingo-ticket ng-init="game.longPollingService.startPolling()"></bingo-ticket>');
+                '<bingo-ticket ng-init="game.longPollingService.startPolling()"></bingo-ticket>'+
+                '<div class="winner"><h1>{{game.longPollingService.winnerMessage}}</h1></div>');
         }]);
 })();

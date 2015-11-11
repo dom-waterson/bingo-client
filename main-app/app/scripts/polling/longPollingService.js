@@ -7,7 +7,7 @@
             me.startNumber = 1;
             me.winnerMessage ='';
             me.numbersToWin = 5;
-            var winnerHasNotBeenFound = true;
+            me.winnerHasNotBeenFound = true;
 
             me.startPolling = function() {
                 proxy.getBingoNumber(userModel.token, userModel.name, userModel.currentBalance, me.startNumber).then(function(response) {
@@ -16,8 +16,7 @@
                     checkForWinnerfound(response);
                     numberService.findNumberInTicket(me.currentNumber);
                     me.numbersToWin = numberService.findHowManyNumberAreLeftForPrize();
-                    console.log(me.numbersToWin);
-                    if(winnerHasNotBeenFound){
+                    if(me.winnerHasNotBeenFound){
                         $timeout(me.startPolling, 2000);
                     }
                 });
@@ -34,7 +33,7 @@
             };
 
             var fullHouseFound = function (data) {
-                winnerHasNotBeenFound = false;
+                me.winnerHasNotBeenFound = false;
                 me.winnerMessage = "Full house! you have won £" + data.payload.winnerInfo.houseprize;
                 userModel.currentBalance += data.payload.winnerInfo.houseprize;
             };
