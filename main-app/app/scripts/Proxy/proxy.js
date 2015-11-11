@@ -1,0 +1,45 @@
+(function () {
+    'use strict';
+    angular.module('Tombola.BingoClient.Proxy')
+        .service('proxy',['$http', '$q', function ($http, $q) {
+
+            var me = this;
+
+            var callApi = function (endpoint, action, data, token){
+                var deferred = $q.defer();
+                var req = {
+                    method: action,
+                    url: 'http://eutaveg-01.tombola.emea:30069/' + endpoint,
+                    data: data,
+                    headers : {
+                        'x-token' : token,
+                        'content-type' : 'application/json'
+                    }
+                };
+                $http(req).
+                    then(function(response) {
+                        deferred.resolve(response.data);
+                    }).catch( function(response) {
+                        deferred.reject(response.data);
+                        console.log('Error coming from proxy:' + response);
+                    });
+
+                return deferred.promise;
+            };
+
+            me.login = function (username, password) {
+                var urlEndPoint = 'users/login';
+                var data = {
+                    'username' : username,
+                    'password' : password
+                };
+                return callApi(urlEndPoint, 'POST', data);
+            };
+
+            me.logout = function (token) {
+                var urlEndPoint = 'users/logout';
+                var data = {};
+                return callApi(urlEndPoint, 'POST', data, token);
+            };
+        }]);
+})();
