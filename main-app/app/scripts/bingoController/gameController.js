@@ -8,9 +8,7 @@
             me.nextGameModel = nextGameService;
 
             me.nextGame = function () {
-                proxy.nextGame(userModel.token).then(function (response) {
-                    nextGameService.startCounter(response.payload.start);
-                });
+                nextGameService.startCounter();
             };
 
             me.buyTicket = function () {

@@ -3,34 +3,29 @@
     angular.module('Tombola.BingoClient.NextGameService')
         .service('nextGameService', ['$state', '$interval', 'userModel','proxy', function ($state, $interval, userModel, proxy) {
             var me = this;
-
-            me.timeToGame = 0;
             var gameLoop;
+            me.timeToGame = 0;
 
-            me.startCounter = function (time) {
-                var currentDate = new Date();
-                var dateFromApi = new Date(time);
-                var timeDiff = Math.abs(dateFromApi.getTime() - currentDate.getTime());
-                me.timeToGame = (timeDiff/1000).toFixed(0);
-                gameLoop = $interval(me.updateTime, 1000, me.timeToGame);
+            me.startCounter = function () {
+                proxy.nextGame(userModel.token).then(function (response) {
+                    var currentDate = new Date();
+                    var dateFromApi = new Date(response.payload.start);
+                    me.timeToGame = Math.abs(dateFromApi.getTime() - currentDate.getTime());
+                    gameLoop = $interval(updateTime, 1000, me.timeToGame);
+                });
             };
 
-            me.updateTime = function () {
-                me.timeToGame -= 1;
-                if(me.timeToGame === 0){
-                    checkTicketPurchased();
-                }
-            };
-
-            var checkTicketPurchased = function () {
-                if(userModel.ticketBought){
-                    $state.go('playing');
-                    userModel.ticketBought = false;
-                }
-                else {
-                    proxy.nextGame(userModel.token).then(function (response) {
-                        me.startCounter(response.payload.start);
-                    });
+            var updateTime = function(){
+                me.timeToGame-= 1000;
+                console.log(me.timeToGame);
+                if(me.timeToGame < 1000){
+                    me.stop();
+                    if(userModel.ticketBought){
+                        $state.go('playing');
+                        userModel.ticketBought = false;
+                        return;
+                    }
+                    me.startCounter();
                 }
             };
 
