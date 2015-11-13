@@ -11,12 +11,10 @@
     <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
 </head>
-<body>
-<div class="mainContent" ng-controller="loginController as logCrtl">
-    <h1>{{logCrtl.message}}</h1>
-    <button ng-click="logCrtl.login()">Login</button>
-    <button ng-click="logCrtl.logout()">Logout</button>
-</div>
+<body ng-controller="gameController as game">
+    <div ui-view class="main-content">
+
+    </div>
 </body>
 <script src="scripts/app.js"></script>
 </html>

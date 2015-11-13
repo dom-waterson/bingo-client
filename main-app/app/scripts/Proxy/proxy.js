@@ -41,5 +41,17 @@
                 var data = {};
                 return callApi(urlEndPoint, 'POST', data, token);
             };
+
+            me.nextGame = function (token) {
+                var urlEndpoint = 'game/next';
+                var data = {};
+                return callApi(urlEndpoint, 'GET', data, token);
+            };
+
+            me.buyTicket = function (token, balance, userId) {
+                var urlEndPoint = 'game/buyticket';
+                var data = {'gameId': 1, 'userId': userId, 'balance': balance};
+                return callApi(urlEndPoint, 'POST', data, token);
+            };
         }]);
 })();
