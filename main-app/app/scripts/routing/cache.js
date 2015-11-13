@@ -17,8 +17,8 @@
                 '</div>'+
                 '<div ng-init="game.nextGame()">'+
                     '<h1 class="title">Time Till Next Game:</h1>'+
-                    '<h1 class="counter">{{nextGameModel.timeToGame}}</h1>'+
-                    '<button class="buttonCenter" ng-click="game.buyTicket()">Buy Ticket {{game.ticketPrice}}P</button> ' +
+                    '<h1 class="counter">{{game.nextGameModel.timeToGame}}</h1>'+
+                    '<button class="buttonCenter" ng-click="game.buyTicket()">Buy Ticket 10p</button> ' +
                 '</div>');
 
             $templateCache.put('bingoTicket.html',

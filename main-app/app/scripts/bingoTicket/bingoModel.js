@@ -3,11 +3,22 @@
     angular.module('Tombola.BingoClient.BingoTicket')
         .service('bingoModel', function () {
             var me = this;
-
-            me.ticket = '';
-
             me.tickets = [];
             me.bingoStrip = [];
+
+            var clearOldTickets = function () {
+                me.tickets = [];
+                me.bingoStrip = [];
+            };
+
+            me.getTicket = function (ticketFromServer) {
+                clearOldTickets();
+                generateTickets(ticketFromServer);
+                for(var i = 0; i < me.tickets.length; i++){
+                    createBingoTicketGrid();
+                    splitingNumbersUp(me.tickets[i]);
+                }
+            };
 
             var createBingoTicketGrid = function () {
                 me.ticketGrid = [
@@ -15,14 +26,6 @@
                     [null, null,null,null,null,null,null,null,null],
                     [null, null,null,null,null,null,null,null,null]
                 ];
-            };
-
-            me.getTicket = function () {
-                generateTickets(me.ticket);
-                for(var i = 0; i < me.tickets.length; i++){
-                    createBingoTicketGrid();
-                    splitingNumbersUp(me.tickets[i]);
-                }
             };
 
             var generateTickets = function (ticket) {
