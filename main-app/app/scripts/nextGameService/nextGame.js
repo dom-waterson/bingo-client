@@ -17,7 +17,6 @@
 
             var updateTime = function(){
                 me.timeToGame-= 1000;
-                console.log(me.timeToGame);
                 if(me.timeToGame < 1000){
                     me.stop();
                     if(userModel.ticketBought){

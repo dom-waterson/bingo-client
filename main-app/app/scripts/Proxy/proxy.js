@@ -9,7 +9,8 @@
                 var deferred = $q.defer();
                 var req = {
                     method: action,
-                    url: 'http://eutaveg-01.tombola.emea:30069/' + endpoint,
+                    //url: 'http://eutaveg-01.tombola.emea:30069/' + endpoint,
+                    url: 'http://localhost:30069/' + endpoint,
                     data: data,
                     headers : {
                         'x-token' : token,
@@ -53,5 +54,12 @@
                 var data = {'gameId': 1, 'userId': userId, 'balance': balance};
                 return callApi(urlEndPoint, 'POST', data, token);
             };
+
+            me.getBingoNumber = function (token, userId, balance, call) {
+                var urlEndPoint = 'game/getcall';
+                var data = {"gameId":1, "userId":userId, "balance":balance, "callnumber":call};
+                return callApi(urlEndPoint, 'POST', data, token);
+            };
+
         }]);
 })();
