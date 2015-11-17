@@ -14,7 +14,7 @@
                     me.currentNumber = response.payload.call;
                     me.startNumber += 1;
                     checkForWinnerfound(response);
-                    //TODO: Check for number to colour in and find out how many numbers are left to win.
+                    numberService.findNumberInTicket(me.currentNumber);
                     if(me.winnerHasNotBeenFound){
                         $timeout(me.startPolling, 2000);
                     }
