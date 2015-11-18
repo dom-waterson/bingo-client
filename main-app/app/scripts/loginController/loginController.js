@@ -9,7 +9,7 @@
             me.login = function () {
                 proxy.login(me.userName, me.userPassword).then(function (response) {
                     if(response.message === 'LoginSuccess'){
-                        userModel.createUser(response.payload.user.username, '2000');
+                        userModel.createUser(response.payload.user.username, response.payload.user.balance);
                         tokenService.setToken(response.payload.user.token);
                         $state.go('lobby');
                     }
