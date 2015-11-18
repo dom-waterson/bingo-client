@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.Proxy')
-        .service('proxy',['$http', '$q', function ($http, $q) {
+        .service('proxy',['$http', '$q', 'objectConverter', function ($http, $q, objectConverter) {
 
             var me = this;
 
@@ -19,7 +19,15 @@
                 };
                 $http(req).
                     then(function(response) {
-                        deferred.resolve(response.data);
+                        if(response.data.payload.message === 'winner')
+                        {
+                            var temp = objectConverter.convert(response, 'winnerFound');
+                            deferred.resolve(temp);
+                        }
+                        else{
+                            var object = objectConverter.convert(response, endpoint);
+                            deferred.resolve(object);
+                        }
                     }).catch( function(response) {
                         deferred.reject(response.data);
                         console.log('Error coming from proxy:' + response);

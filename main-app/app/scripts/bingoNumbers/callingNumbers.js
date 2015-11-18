@@ -11,12 +11,12 @@
 
             me.startPolling = function() {
                 proxy.getBingoNumber(tokenService.getToken(), userModel.name, userModel.currentBalance, me.startNumber).then(function(response) {
-                    me.currentNumber = response.payload.call;
+                    me.currentNumber = response.ball;
                     me.startNumber += 1;
                     checkForWinnerfound(response);
                     numberService.findNumberInTicket(me.currentNumber);
                     if(me.winnerHasNotBeenFound){
-                        $timeout(me.startPolling, 2000);
+                        $timeout(me.startPolling, 500);
                     }
                 });
             };
@@ -33,13 +33,13 @@
 
             var fullHouseFound = function (data) {
                 me.winnerHasNotBeenFound = false;
-                me.winnerMessage = "Full house! you have won £" + data.payload.winnerInfo.houseprize;
-                userModel.currentBalance += data.payload.winnerInfo.houseprize;
+                me.winnerMessage = "Full house! you have won £" + data.winnerInfo.houseprize;
+                userModel.currentBalance += data.winnerInfo.houseprize;
             };
 
             var lineFound = function (data) {
-                me.winnerMessage = "Line Found! you have won £" + data.payload.winnerInfo.lineprize;
-                userModel.currentBalance += data.payload.winnerInfo.lineprize;
+                me.winnerMessage = "Line Found! you have won £" + data.winnerInfo.lineprize;
+                userModel.currentBalance += data.winnerInfo.lineprize;
             };
         }]);
 })();

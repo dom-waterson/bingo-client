@@ -9,7 +9,7 @@
             me.startCounter = function () {
                 proxy.nextGame(tokenService.getToken()).then(function (response) {
                     var currentDate = new Date();
-                    var dateFromApi = new Date(response.payload.start);
+                    var dateFromApi = new Date(response.start);
                     me.timeToGame = Math.abs(dateFromApi.getTime() - currentDate.getTime());
                     gameLoop = $interval(updateTime, 1000, me.timeToGame);
                 });

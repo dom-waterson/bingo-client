@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-    angular.module('Tombola.BingoClient.Proxy', []);
+    angular.module('Tombola.BingoClient.ObjectConverter', []);
+    angular.module('Tombola.BingoClient.Proxy', ['Tombola.BingoClient.ObjectConverter']);
     angular.module('Tombola.BingoClient.UserModel', []);
     angular.module('Tombola.BingoClient.BingoTicket', []);
     angular.module('Tombola.NumberService', ['Tombola.BingoClient.BingoTicket']);

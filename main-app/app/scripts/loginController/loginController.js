@@ -9,8 +9,8 @@
             me.login = function () {
                 proxy.login(me.userName, me.userPassword).then(function (response) {
                     if(response.message === 'LoginSuccess'){
-                        userModel.createUser(response.payload.user.username, response.payload.user.balance);
-                        tokenService.setToken(response.payload.user.token);
+                        userModel.createUser(response.name, response.balance);
+                        tokenService.setToken(response.token);
                         $state.go('lobby');
                     }
                 });
