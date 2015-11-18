@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Tombola.LongPollingService')
-        .service('longPolling',['$timeout', 'proxy', 'userModel', 'numberService', function ($timeout, proxy, userModel, numberService) {
+        .service('longPolling',['$timeout', 'proxy', 'userModel', 'numberService', 'tokenService', function ($timeout, proxy, userModel, numberService, tokenService) {
             var me = this;
             me.currentNumber = 0;
             me.startNumber = 1;
@@ -10,7 +10,7 @@
             me.winnerHasNotBeenFound = true;
 
             me.startPolling = function() {
-                proxy.getBingoNumber(userModel.token, userModel.name, userModel.currentBalance, me.startNumber).then(function(response) {
+                proxy.getBingoNumber(tokenService.getToken(), userModel.name, userModel.currentBalance, me.startNumber).then(function(response) {
                     me.currentNumber = response.payload.call;
                     me.startNumber += 1;
                     checkForWinnerfound(response);

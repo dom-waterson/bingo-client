@@ -1,13 +1,13 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.NextGameService')
-        .service('nextGameService', ['$state', '$interval', 'userModel','proxy', function ($state, $interval, userModel, proxy) {
+        .service('nextGameService', ['$state', '$interval', 'userModel','proxy', 'tokenService', function ($state, $interval, userModel, proxy, tokenService) {
             var me = this;
             var gameLoop;
             me.timeToGame = 0;
 
             me.startCounter = function () {
-                proxy.nextGame(userModel.token).then(function (response) {
+                proxy.nextGame(tokenService.getToken()).then(function (response) {
                     var currentDate = new Date();
                     var dateFromApi = new Date(response.payload.start);
                     me.timeToGame = Math.abs(dateFromApi.getTime() - currentDate.getTime());

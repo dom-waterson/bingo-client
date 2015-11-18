@@ -7,14 +7,12 @@
             me.clearUser = function (){
                 me.name = '';
                 me.currentBalance = 0;
-                me.token = '';
                 me.ticketBought = false;
             };
 
-            me.createUser = function (name, balance, token) {
+            me.createUser = function (name, balance) {
                 me.name = name;
                 me.currentBalance = balance;
-                me.token = token;
                 me.ticketBought = false;
             };
 
