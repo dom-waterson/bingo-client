@@ -20,9 +20,6 @@
                 else if (call === 'game/getcall') {
                     return generateBingoCallObject(response);
                 }
-                else if (call === 'winnerFound') {
-                    return generateWinnerObject(response);
-                }
             };
 
             var generateLoginObject = function (response) {
@@ -57,21 +54,15 @@
                 return buyTicketObject;
             };
 
-
             var generateBingoCallObject = function (response) {
                 var bingoCallObject = {
                     ball: response.data.payload.call,
-                    message: response.data.message
-                };
-                return bingoCallObject;
-            };
-
-            var generateWinnerObject = function (response) {
-                var bingoCallObject = {
-                    ball: response.data.payload.call,
                     message: response.data.message,
-                    winnerInfo: response.data.payload.winnerInfo
+                    winnerInfo: null
                 };
+                if(response.data.message === 'Line' || response.data.message === 'Winner'){
+                    bingoCallObject.winnerInfo = response.data.payload.winnerInfo;
+                }
                 return bingoCallObject;
             };
         });
