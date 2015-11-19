@@ -61,7 +61,7 @@
             var generateBingoCallObject = function (response) {
                 var bingoCallObject = {
                     ball: response.data.payload.call,
-                    message: response.data.message,
+                    message: response.data.message
                 };
                 return bingoCallObject;
             };

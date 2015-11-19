@@ -19,7 +19,7 @@
                 };
                 $http(req).
                     then(function(response) {
-                        if(response.data.payload.message === 'winner')
+                        if(response.data.message === 'Line' || response.data.message === 'Winner')
                         {
                             var temp = objectConverter.convert(response, 'winnerFound');
                             deferred.resolve(temp);
