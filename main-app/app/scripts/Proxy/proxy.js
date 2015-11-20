@@ -9,7 +9,6 @@
                 var deferred = $q.defer();
                 var req = {
                     method: action,
-                    //url: 'http://eutaveg-01.tombola.emea:30069/' + endpoint,
                     url: 'http://localhost:30069/' + endpoint,
                     data: data,
                     headers : {
