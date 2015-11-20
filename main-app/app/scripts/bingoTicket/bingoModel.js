@@ -20,13 +20,28 @@
                 }
             };
 
+            var BingoCell = function () {
+                this.bingoNumber = null;
+                this.marked = "unmarked";
+                this.counted = false;
+            };
+
+            var TicketInfo = function () {
+                this.row1Marked = 0;
+                this.row2Marked = 0;
+                this.row3Marked = 0;
+                this.numbersToWin = 5;
+            };
+
             var createBingoTicketGrid = function () {
                 me.ticketGrid = [
-                    [null, null,null,null,null,null,null,null,null],
-                    [null, null,null,null,null,null,null,null,null],
-                    [null, null,null,null,null,null,null,null,null]
+                    [new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell()],
+                    [new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell()],
+                    [new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell()],
+                    [new TicketInfo()]
                 ];
             };
+
 
             var generateTickets = function (ticket) {
                 var start = 0;
@@ -51,7 +66,7 @@
             var checkRowForFiveNumbers = function (row) {
                 var count = 0;
                 for (var i = 0; i < 9; i++){
-                    if(me.ticketGrid[row][i] !== null) {
+                    if(me.ticketGrid[row][i].bingoNumber !== null) {
                         count += 1;
                     }
                 }
@@ -64,14 +79,15 @@
             };
 
             var insertNumberIntobingoTicket = function (column, numberFromString) {
-                if(me.ticketGrid[0][column] === null && checkRowForFiveNumbers(0)){
-                    me.ticketGrid[0][column] = numberFromString;
+
+                if(me.ticketGrid[0][column].bingoNumber === null && checkRowForFiveNumbers(0)){
+                    me.ticketGrid[0][column].bingoNumber = numberFromString;
                 }
-                else if (me.ticketGrid[1][column] === null && checkRowForFiveNumbers(1)) {
-                    me.ticketGrid[1][column] = numberFromString;
+                else if (me.ticketGrid[1][column].bingoNumber === null && checkRowForFiveNumbers(1)) {
+                    me.ticketGrid[1][column].bingoNumber = numberFromString;
                 }
                 else {
-                    me.ticketGrid[2][column] = numberFromString;
+                    me.ticketGrid[2][column].bingoNumber = numberFromString;
                 }
             };
 
