@@ -1,11 +1,12 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.GameController')
-        .controller('gameController',['proxy', 'userModel', 'bingoModel', 'nextGameService', function (proxy, userModel, bingoModel, nextGameService) {
+        .controller('gameController',['proxy', 'userModel', 'bingoModel', 'nextGameService', 'longPolling', function (proxy, userModel, bingoModel, nextGameService, longPolling) {
             var me = this;
             me.user = userModel;
             me.bingo = bingoModel;
             me.nextGameModel = nextGameService;
+            me.longPollingService = longPolling;
 
             me.nextGame = function () {
                 nextGameService.startCounter();
