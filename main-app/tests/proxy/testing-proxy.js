@@ -16,21 +16,19 @@
         });
 
         it('Ensures login function communicates successfully with api', function () {
-            $httpBackend.expectPOST('http://eutaveg-01.tombola.emea:30069/users/login', {'username': 'drwho',
+            $httpBackend.expectPOST('http://localhost:30069/users/login', {'username': 'drwho',
                 'password': 'tardis123!'}).respond(responseDataForLogin);
 
-            var returnedPromise = constants.login('drwho', 'tardis123!');
-            returnedPromise.then(function(response){
+            constants.login('drwho', 'tardis123!').then(function(response){
                 response.should.deep.equal(responseDataForLogin);
             });
             $httpBackend.flush();
         });
 
         it('Ensures logout function successfully communicates with the api', function () {
-            $httpBackend.expectPOST('http://eutaveg-01.tombola.emea:30069/users/logout').respond(responseDataForLogout);
+            $httpBackend.expectPOST('http://localhost:30069/users/logout').respond(responseDataForLogout);
 
-            var returnedPromise = constants.logout('token');
-            returnedPromise.then(function(response){
+            constants.logout().then(function(response){
                 response.should.deep.equal(responseDataForLogout);
             });
             $httpBackend.flush();
