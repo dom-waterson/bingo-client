@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.WinnerChecking')
-        .service('WinnerChecking', ['UserModel', function (UserModel) {
+        .service('WinnerChecking', ['UserModel', 'NumberService',  function (UserModel, NumberService) {
             var me = this;
             me.houseNotFound = true;
             me.winnerPrize = 0;
@@ -24,6 +24,7 @@
             };
 
             var lineFound = function (data) {
+                NumberService.linePrizeBeenFound = true;
                 me.winnerPrize = data.payload.winnerInfo.lineprize;
                 UserModel.currentBalance += data.payload.winnerInfo.lineprize;
             };
