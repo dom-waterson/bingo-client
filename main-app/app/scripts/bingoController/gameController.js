@@ -1,21 +1,30 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.GameController')
-        .controller('gameController',['proxy', 'userModel', 'bingoModel', 'nextGameService', function (proxy, userModel, bingoModel, nextGameService) {
+        .controller('GameController',
+        ['Proxy', 'UserModel', 'BingoModel', 'NextGameService', 'BingoNumberCalling', 'WinnerChecking', function (Proxy,
+                                                                                                                  UserModel,
+                                                                                                                  BingoModel,
+                                                                                                                  NextGameService,
+                                                                                                                  BingoNumberCalling,
+                                                                                                                  WinnerChecking) {
             var me = this;
-            me.user = userModel;
-            me.bingo = bingoModel;
-            me.nextGameModel = nextGameService;
+            me.user = UserModel;
+            me.bingo = BingoModel;
+            me.nextGameModel = NextGameService;
+            me.numberCalling = BingoNumberCalling;
+            me.prizeNumbers = WinnerChecking;
 
             me.nextGame = function () {
-                nextGameService.startCounter();
+                NextGameService.startCounter();
             };
 
             me.buyTicket = function () {
-                if(!userModel.ticketBought){
-                    proxy.buyTicket(userModel.token, userModel.currentBalance, userModel.name).then(function (response) {
-                        userModel.userBoughtTicket(response.payload.user.balance);
-                        bingoModel.getTicket(response.payload.card);
+                if (!UserModel.ticketBought) {
+                    Proxy.buyTicket(UserModel.token, UserModel.currentBalance,
+                        UserModel.name).then(function (response) {
+                        UserModel.userBoughtTicket(response.payload.user.balance);
+                        BingoModel.getTicket(response.payload.card);
                     });
                 }
             };

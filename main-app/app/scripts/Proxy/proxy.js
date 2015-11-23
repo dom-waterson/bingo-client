@@ -1,25 +1,25 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.Proxy')
-        .service('proxy',['$http', '$q', function ($http, $q) {
+        .service('Proxy', ['$http', '$q', function ($http, $q) {
 
             var me = this;
 
-            var callApi = function (endpoint, action, data, token){
+            var callApi = function (endpoint, action, data, token) {
                 var deferred = $q.defer();
                 var req = {
                     method: action,
-                    url: 'http://eutaveg-01.tombola.emea:30069/' + endpoint,
+                    url: 'http://localhost:30069/' + endpoint,
                     data: data,
-                    headers : {
-                        'x-token' : token,
-                        'content-type' : 'application/json'
+                    headers: {
+                        'x-token': token,
+                        'content-type': 'application/json'
                     }
                 };
                 $http(req).
-                    then(function(response) {
+                    then(function (response) {
                         deferred.resolve(response.data);
-                    }).catch( function(response) {
+                    }).catch(function (response) {
                         deferred.reject(response.data);
                         console.log('Error coming from proxy:' + response);
                     });
@@ -30,8 +30,8 @@
             me.login = function (username, password) {
                 var urlEndPoint = 'users/login';
                 var data = {
-                    'username' : username,
-                    'password' : password
+                    'username': username,
+                    'password': password
                 };
                 return callApi(urlEndPoint, 'POST', data);
             };
@@ -53,5 +53,12 @@
                 var data = {'gameId': 1, 'userId': userId, 'balance': balance};
                 return callApi(urlEndPoint, 'POST', data, token);
             };
+
+            me.getBingoNumber = function (token, userId, balance, call) {
+                var urlEndPoint = 'game/getcall';
+                var data = {"gameId": 1, "userId": userId, "balance": balance, "callnumber": call};
+                return callApi(urlEndPoint, 'POST', data, token);
+            };
+
         }]);
 })();
