@@ -1,13 +1,14 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.NextGameService')
-        .service('nextGameService', ['$state', '$interval', 'userModel','proxy', function ($state, $interval, userModel, proxy) {
+        .service('NextGameService',
+        ['$state', '$interval', 'UserModel', 'Proxy', function ($state, $interval, UserModel, Proxy) {
             var me = this;
             var gameLoop;
             me.timeToGame = 0;
 
             me.startCounter = function () {
-                proxy.nextGame(userModel.token).then(function (response) {
+                Proxy.nextGame(UserModel.token).then(function (response) {
                     var currentDate = new Date();
                     var dateFromApi = new Date(response.payload.start);
                     me.timeToGame = Math.abs(dateFromApi.getTime() - currentDate.getTime());
@@ -15,13 +16,13 @@
                 });
             };
 
-            var updateTime = function(){
-                me.timeToGame-= 1000;
-                if(me.timeToGame < 1000){
+            var updateTime = function () {
+                me.timeToGame -= 1000;
+                if (me.timeToGame < 1000) {
                     me.stop();
-                    if(userModel.ticketBought){
+                    if (UserModel.ticketBought) {
                         $state.go('playing');
-                        userModel.ticketBought = false;
+                        UserModel.ticketBought = false;
                         return;
                     }
                     me.startCounter();
@@ -29,7 +30,7 @@
             };
 
             me.stop = function () {
-              $interval.cancel(gameLoop);
+                $interval.cancel(gameLoop);
             };
         }]);
 })();

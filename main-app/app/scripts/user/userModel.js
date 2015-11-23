@@ -1,10 +1,10 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.UserModel')
-        .service('userModel', function () {
+        .service('UserModel', function () {
             var me = this;
 
-            me.clearUser = function (){
+            me.clearUser = function () {
                 me.name = '';
                 me.currentBalance = 0;
                 me.token = '';
