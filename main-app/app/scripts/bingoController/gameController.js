@@ -2,12 +2,13 @@
     'use strict';
     angular.module('Tombola.BingoClient.GameController')
         .controller('GameController',
-        ['Proxy', 'UserModel', 'BingoModel', 'NextGameService', 'BingoNumberCalling', 'WinnerChecking', function (Proxy,
-                                                                                                                  UserModel,
-                                                                                                                  BingoModel,
-                                                                                                                  NextGameService,
-                                                                                                                  BingoNumberCalling,
-                                                                                                                  WinnerChecking) {
+        ['Proxy', 'UserModel', 'BingoModel', 'NextGameService', 'BingoNumberCalling', 'WinnerChecking', 'ObjectConverter', function (Proxy,
+                                                                                                                                     UserModel,
+                                                                                                                                     BingoModel,
+                                                                                                                                     NextGameService,
+                                                                                                                                     BingoNumberCalling,
+                                                                                                                                     WinnerChecking,
+                                                                                                                                     ObjectConverter) {
             var me = this;
             me.user = UserModel;
             me.bingo = BingoModel;
@@ -23,8 +24,11 @@
                 if (!UserModel.ticketBought) {
                     Proxy.buyTicket(UserModel.currentBalance,
                         UserModel.name).then(function (response) {
-                            UserModel.userBoughtTicket(response.payload.user.balance);
-                            BingoModel.getTicket(response.payload.card);
+                            var buyTicketObject = ObjectConverter.generateBuyTicketObject(response);
+                            UserModel.userBoughtTicket(buyTicketObject.balance);
+                            BingoModel.getTicket(buyTicketObject.ticket);
+                            BingoNumberCalling.setToDefault();
+                            WinnerChecking.houseNotFound = true;
                         });
                 }
             };
