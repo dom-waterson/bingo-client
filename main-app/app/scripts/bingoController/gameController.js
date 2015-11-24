@@ -21,11 +21,11 @@
 
             me.buyTicket = function () {
                 if (!UserModel.ticketBought) {
-                    Proxy.buyTicket(UserModel.token, UserModel.currentBalance,
+                    Proxy.buyTicket(UserModel.currentBalance,
                         UserModel.name).then(function (response) {
-                        UserModel.userBoughtTicket(response.payload.user.balance);
-                        BingoModel.getTicket(response.payload.card);
-                    });
+                            UserModel.userBoughtTicket(response.payload.user.balance);
+                            BingoModel.getTicket(response.payload.card);
+                        });
                 }
             };
         }]);

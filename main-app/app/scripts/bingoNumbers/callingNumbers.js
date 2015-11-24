@@ -11,14 +11,14 @@
             var bingoNumberInterval;
 
             me.startPolling = function () {
-                Proxy.getBingoNumber(UserModel.token, UserModel.name, UserModel.currentBalance,
+                Proxy.getBingoNumber(UserModel.name, UserModel.currentBalance,
                     me.startNumber).then(function (response) {
-                    me.currentNumber = response.payload.call;
-                    me.startNumber += 1;
-                    WinnerChecking.checkForWinnerfound(response);
-                    //TODO: Check for number to colour in and find out how many numbers are left to win.
-                    bingoNumberInterval = $interval(checking, 2000, 1);
-                });
+                        me.currentNumber = response.payload.call;
+                        me.startNumber += 1;
+                        WinnerChecking.checkForWinnerfound(response);
+                        //TODO: Check for number to colour in and find out how many numbers are left to win.
+                        bingoNumberInterval = $interval(checking, 2000, 1);
+                    });
             };
 
             var checking = function () {

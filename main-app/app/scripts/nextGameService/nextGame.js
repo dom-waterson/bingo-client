@@ -8,7 +8,7 @@
             me.timeToGame = 0;
 
             me.startCounter = function () {
-                Proxy.nextGame(UserModel.token).then(function (response) {
+                Proxy.nextGame().then(function (response) {
                     var currentDate = new Date();
                     var dateFromApi = new Date(response.payload.start);
                     me.timeToGame = Math.abs(dateFromApi.getTime() - currentDate.getTime());
