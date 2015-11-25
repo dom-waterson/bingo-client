@@ -4,7 +4,7 @@
     angular.module('Tombola.BingoClient.UserModel', []);
     angular.module('Tombola.BingoClient.BingoTicket', []);
     angular.module('Tombola.BingoClient.WinnerChecking',
-        ['Tombola.BingoNumberCalling', 'Tombola.BingoClient.UserModel']);
+        ['Tombola.BingoNumberCalling', 'Tombola.BingoClient.UserModel', 'Tombola.NumberService']);
     angular.module('Tombola.NumberService', ['Tombola.BingoClient.BingoTicket']);
     angular.module('Tombola.BingoNumberCalling',
         ['Tombola.BingoClient.Proxy', 'Tombola.BingoClient.UserModel', 'Tombola.BingoClient.WinnerChecking']);
