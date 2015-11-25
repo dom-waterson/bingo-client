@@ -11,8 +11,7 @@
                     'before'     : false,
                     'beforeEach' : false,
                     'after'      : false,
-                    'afterEach'  : false,
-
+                    'afterEach'  : false
                 }
             }
         },
