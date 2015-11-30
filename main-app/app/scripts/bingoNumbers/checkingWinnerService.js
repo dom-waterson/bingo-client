@@ -19,14 +19,14 @@
 
             var fullHouseFound = function (data) {
                 me.houseNotFound = false;
-                me.winnerPrize = data.payload.winnerInfo.houseprize;
-                UserModel.currentBalance += data.payload.winnerInfo.houseprize;
+                me.winnerPrize = data.winnerInfo.houseprize;
+                UserModel.currentBalance += data.winnerInfo.houseprize;
             };
 
             var lineFound = function (data) {
                 NumberService.linePrize = false;
-                me.winnerPrize = data.payload.winnerInfo.lineprize;
-                UserModel.currentBalance += data.payload.winnerInfo.lineprize;
+                me.winnerPrize = data.winnerInfo.lineprize;
+                UserModel.currentBalance += data.winnerInfo.lineprize;
             };
         }]);
 })();
