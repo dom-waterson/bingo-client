@@ -20,7 +20,7 @@
                         me.currentNumber = numberCallingObject.ball;
                         me.startNumber += 1;
                         WinnerChecking.checkForWinnerfound(numberCallingObject);
-                        //TODO: Check for number to colour in and find out how many numbers are left to win.
+                        NumberService.findNumberInTicket(me.currentNumber);
                         bingoNumberInterval = $interval(checking, 500, 1);
                     });
             };
