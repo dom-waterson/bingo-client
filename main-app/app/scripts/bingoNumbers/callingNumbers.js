@@ -16,7 +16,7 @@
                     me.currentNumber = response.payload.call;
                     me.startNumber += 1;
                     WinnerChecking.checkForWinnerfound(response);
-                    NumberService.findNumberInTicket(me.currentNumber);
+                    //TODO: Check for number to colour in and find out how many numbers are left to win.
                     bingoNumberInterval = $interval(checking, 2000, 1);
                 });
             };
