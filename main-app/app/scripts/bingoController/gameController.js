@@ -27,6 +27,7 @@
                             var buyTicketObject = ObjectConverter.generateBuyTicketObject(response);
                             UserModel.userBoughtTicket(buyTicketObject.balance);
                             BingoModel.getTicket(buyTicketObject.ticket);
+                            //console.log("coming from game controller" + buyTicketObject.ticket);
                             BingoNumberCalling.setToDefault();
                             WinnerChecking.houseNotFound = true;
                         });

@@ -23,12 +23,13 @@
 
             me.generateBuyTicketObject = function (response) {
                 var splitTicketString = function (ticketString) {
-                    var start = 0,
-                        end = 30;
-                    for (start; start < ticketString.length; start += 30) {
-                        ticketsArray.push(ticketString.slice(start, end));
-                        end += 30;
-                    }
+                        var ticketArray = [
+                            [ticketString.slice(0,10)],
+                            [ticketString.slice(10,20)],
+                            [ticketString.slice(20,30)]
+                        ];
+
+                        return ticketArray;
                 },
                 buyTicketObject = {
                     ticket: splitTicketString(response.payload.card),

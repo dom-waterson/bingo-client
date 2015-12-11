@@ -18,11 +18,12 @@
                 };
                 $http(req).
                     then(function (response) {
-                        if(converter){
-                            deferred.resolve(converter(response.data));
-                        }else {
-                            deferred.resolve(response.data);
-                        }
+                        //if(converter){
+                        //    deferred.resolve(converter(response.data));
+                        //}else {
+                        //    deferred.resolve(response.data);
+                        //}
+                        deferred.resolve(response.data);
                     }).catch(function (response) {
                         deferred.reject(response.data);
                         console.log('Error coming from proxy:' + response);

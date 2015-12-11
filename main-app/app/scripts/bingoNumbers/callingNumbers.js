@@ -20,7 +20,7 @@
                         me.currentNumber = numberCallingObject.ball;
                         me.startNumber += 1;
                         WinnerChecking.checkForWinnerfound(numberCallingObject);
-                        NumberService.findNumberInTicket(me.currentNumber);
+                        //NumberService.findNumberInTicket(me.currentNumber);
                         bingoNumberInterval = $interval(checking, 500, 1);
                     });
             };

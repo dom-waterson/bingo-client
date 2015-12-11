@@ -10,7 +10,7 @@
                 for(i = 0; i < BingoModel.bingoStrip.length; i++){
                     for (row = 0; row < 3; row++){
                         for(col = 0; col < 9; col++){
-                            bingoCell = BingoModel.bingoStrip[i][row][col];
+                            bingoCell = BingoModel.bingoStrip[0][row][col];
                             if(bingoCell.bingoNumber === calledNumber){
                                 bingoCell.cssClass = 'checked';
                                 findHowManyNumberAreLeftForPrize(bingoCell, row, i);
