@@ -1,20 +1,13 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.BingoTicket')
-        .service('BingoModel', function () {
+        .service('BingoModel', function (WinnerChecking) {
             var me = this;
 
             var BingoCell = function () {
                 var me = this;
                 me.bingoNumber;
                 me.called;
-                me.isToGo = function(){
-                    if(bingoNumber){
-                        return !called;
-                    }
-                    return false;
-                };
-
                 me.addNumber = function(number){
                     me.bingoNumber = number;
                 };
@@ -23,30 +16,32 @@
 
             var TicketLine = function () {
                 var me = this;
+                me.numbersCounted = 0;
 
                 me.cells =  [new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(),
                     new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell()];
 
                 me.getToGo = function(){
-                    //TODO: Iterate over the cells, summing to the
+                    return me.numbersCounted;
                 };
 
                 me.makeCall = function(call){
                     var col  = call / 10;
                     if(Math.floor(col) < 9){
                         if(me.cells[Math.floor(col)].bingoNumber === call){
-                            console.log("found match");
                             me.cells[Math.floor(col)].called = true;
+                            me.isCalled();
                         }
                     }else {
                         if(me.cells[8].bingoNumber === call){
                             me.cells[8].called = true;
+                            me.isCalled();
                         }
                     }
                 };
 
                 me.isCalled = function(){
-                    //TODO: getToGo === 0;
+                    me.numbersCounted++;
                 };
 
                 me.addNumber = function(number){
@@ -67,8 +62,16 @@
                             new TicketLine()];
 
                 me.getToGo = function(){
-                    //TODO: either iterate over lines if there is a house prize to be won,
-                    // or sum all lines togo values;
+                    var firstLineTotal, secondLineTotal, thirdLineTotal;
+                    firstLineTotal = me.lines[0].getToGo();
+                    secondLineTotal = me.lines[1].getToGo();
+                    thirdLineTotal = me.lines[2].getToGo();
+
+                    if(WinnerChecking.lineNotFound) {
+                        return 5 - Math.max(firstLineTotal, secondLineTotal, thirdLineTotal);
+                    }else {
+                        return 15 - (firstLineTotal + secondLineTotal + thirdLineTotal);
+                    }
                 };
 
                 me.makeCall = function(call){

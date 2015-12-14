@@ -5,7 +5,7 @@
 
             var me = this;
 
-            var callApi = function (endpoint, action, data, converter) {
+            var callApi = function (endpoint, action, data) {
                 var deferred = $q.defer();
                 var req = {
                     method: action,
@@ -18,11 +18,6 @@
                 };
                 $http(req).
                     then(function (response) {
-                        //if(converter){
-                        //    deferred.resolve(converter(response.data));
-                        //}else {
-                        //    deferred.resolve(response.data);
-                        //}
                         deferred.resolve(response.data);
                     }).catch(function (response) {
                         deferred.reject(response.data);

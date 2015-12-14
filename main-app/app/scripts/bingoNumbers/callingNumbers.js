@@ -2,10 +2,9 @@
     'use strict';
     angular.module('Tombola.BingoNumberCalling')
         .service('BingoNumberCalling',
-        ['$interval', 'Proxy', 'UserModel', 'NumberService', 'WinnerChecking', 'ObjectConverter', 'BingoModel', function ($interval,
+        ['$interval', 'Proxy', 'UserModel', 'WinnerChecking', 'ObjectConverter', 'BingoModel', function ($interval,
                                                                                                             Proxy,
                                                                                                             UserModel,
-                                                                                                            NumberService,
                                                                                                             WinnerChecking,
                                                                                                             ObjectConverter,
                                                                                                             BingoModel) {
