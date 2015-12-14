@@ -22,8 +22,17 @@
             };
 
             me.generateBuyTicketObject = function (response) {
-                var buyTicketObject = {
-                    ticket: response.payload.card,
+                var splitTicketString = function (ticketString) {
+                        var ticketArray = [
+                            [ticketString.slice(0,10)],
+                            [ticketString.slice(10,20)],
+                            [ticketString.slice(20,30)]
+                        ];
+
+                        return ticketArray;
+                },
+                buyTicketObject = {
+                    ticket: splitTicketString(response.payload.card),
                     balance: response.payload.user.balance
                 };
                 return buyTicketObject;
@@ -35,10 +44,11 @@
                     message: response.message,
                     winnerInfo: null
                 };
-                if(response.message === 'Line' || response.message === 'Winner'){
+                if (response.message === 'Line' || response.message === 'Winner') {
                     bingoCallObject.winnerInfo = response.payload.winnerInfo;
                 }
                 return bingoCallObject;
             };
         });
+
 })();

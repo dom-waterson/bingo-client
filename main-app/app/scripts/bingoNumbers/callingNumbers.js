@@ -2,12 +2,12 @@
     'use strict';
     angular.module('Tombola.BingoNumberCalling')
         .service('BingoNumberCalling',
-        ['$interval', 'Proxy', 'UserModel', 'NumberService', 'WinnerChecking', 'ObjectConverter', function ($interval,
+        ['$interval', 'Proxy', 'UserModel', 'WinnerChecking', 'ObjectConverter', 'BingoModel', function ($interval,
                                                                                                             Proxy,
                                                                                                             UserModel,
-                                                                                                            NumberService,
                                                                                                             WinnerChecking,
-                                                                                                            ObjectConverter) {
+                                                                                                            ObjectConverter,
+                                                                                                            BingoModel) {
             var me = this;
             me.currentNumber = 0;
             me.startNumber = 1;
@@ -20,7 +20,7 @@
                         me.currentNumber = numberCallingObject.ball;
                         me.startNumber += 1;
                         WinnerChecking.checkForWinnerfound(numberCallingObject);
-                        //TODO: Check for number to colour in and find out how many numbers are left to win.
+                        BingoModel.ticket.makeCall(me.currentNumber);
                         bingoNumberInterval = $interval(checking, 500, 1);
                     });
             };

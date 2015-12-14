@@ -1,109 +1,104 @@
 (function () {
     'use strict';
     angular.module('Tombola.BingoClient.BingoTicket')
-        .service('BingoModel', function () {
+        .service('BingoModel', function (WinnerChecking) {
             var me = this;
-            me.tickets = [];
-            me.bingoStrip = [];
 
-            var clearOldTickets = function () {
-                me.tickets = [];
-                me.bingoStrip = [];
+            var BingoCell = function () {
+                var me = this;
+                me.bingoNumber;
+                me.called;
+                me.addNumber = function(number){
+                    me.bingoNumber = number;
+                };
             };
 
-            me.getTicket = function (ticketFromServer) {
-                clearOldTickets();
-                generateTickets(ticketFromServer);
-                for (var i = 0; i < me.tickets.length; i++) {
-                    createBingoTicketGrid();
-                    splitingNumbersUp(me.tickets[i]);
-                }
-            };
 
-            var createBingoTicketGrid = function () {
-                me.ticketGrid = [
-                    [null, null, null, null, null, null, null, null, null],
-                    [null, null, null, null, null, null, null, null, null],
-                    [null, null, null, null, null, null, null, null, null]
-                ];
-            };
+            var TicketLine = function () {
+                var me = this;
+                me.numbersCounted = 0;
 
-            var generateTickets = function (ticket) {
-                var start = 0;
-                var end = 30;
-                for (start; start < ticket.length; start += 30) {
-                    me.tickets.push(ticket.slice(start, end));
-                    end += 30;
-                }
-            };
+                me.cells =  [new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell(),
+                    new BingoCell(), new BingoCell(), new BingoCell(), new BingoCell()];
 
-            var splitingNumbersUp = function (strTicket) {
-                var numStart = 0;
-                var numEnd = 2;
-                for (var j = 0; j < 15; j++) {
-                    sortingTicket(strTicket.slice(numStart, numEnd));
-                    numStart += 2;
-                    numEnd += 2;
-                }
-                me.bingoStrip.push(me.ticketGrid);
-            };
+                me.getToGo = function(){
+                    return me.numbersCounted;
+                };
 
-            var checkRowForFiveNumbers = function (row) {
-                var count = 0;
-                for (var i = 0; i < 9; i++) {
-                    if (me.ticketGrid[row][i] !== null) {
-                        count += 1;
+                me.makeCall = function(call){
+                    var col  = call / 10;
+                    if(Math.floor(col) < 9){
+                        if(me.cells[Math.floor(col)].bingoNumber === call){
+                            me.cells[Math.floor(col)].called = true;
+                            me.isCalled();
+                        }
+                    }else {
+                        if(me.cells[8].bingoNumber === call){
+                            me.cells[8].called = true;
+                            me.isCalled();
+                        }
                     }
-                }
-                if (count === 5) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+                };
+
+                me.isCalled = function(){
+                    me.numbersCounted++;
+                };
+
+                me.addNumber = function(number){
+                    var col  = number / 10;
+                    if(Math.floor(col) < 9){
+                        me.cells[Math.floor(col)].addNumber(number);
+                    } else {
+                        me.cells[8].addNumber(number);
+                    }
+                };
             };
 
-            var insertNumberIntobingoTicket = function (column, numberFromString) {
-                if (me.ticketGrid[0][column] === null && checkRowForFiveNumbers(0)) {
-                    me.ticketGrid[0][column] = numberFromString;
-                }
-                else if (me.ticketGrid[1][column] === null && checkRowForFiveNumbers(1)) {
-                    me.ticketGrid[1][column] = numberFromString;
-                }
-                else {
-                    me.ticketGrid[2][column] = numberFromString;
-                }
+            var BingoTicket = function(){
+                var me = this;
+
+                me.lines = [new TicketLine(),
+                            new TicketLine(),
+                            new TicketLine()];
+
+                me.getToGo = function(){
+                    var firstLineTotal, secondLineTotal, thirdLineTotal;
+                    firstLineTotal = me.lines[0].getToGo();
+                    secondLineTotal = me.lines[1].getToGo();
+                    thirdLineTotal = me.lines[2].getToGo();
+
+                    if(WinnerChecking.lineNotFound) {
+                        return 5 - Math.max(firstLineTotal, secondLineTotal, thirdLineTotal);
+                    }else {
+                        return 15 - (firstLineTotal + secondLineTotal + thirdLineTotal);
+                    }
+                };
+
+                me.makeCall = function(call){
+                    var line;
+                    for(line in me.lines){
+                        me.lines[line].makeCall(call);
+                    }
+                };
+
+                me.fillTicket = function(numbers){
+                    var row; var start = 0, end = 2;
+                    for(row in numbers){
+                        var string = numbers[row].toString();
+                        for(var i = 0; i < 5; i++){
+                            me.lines[row].addNumber(parseInt(string.slice(start,end)));
+                            start += 2;
+                            end += 2;
+                        }
+                        start = 0;
+                        end = 2;
+                    }
+                };
             };
 
-            var sortingTicket = function (stringTicket) {
-                var numberFromString = parseInt(stringTicket);
-                if (numberFromString < 10) {
-                    insertNumberIntobingoTicket(0, numberFromString);
-                }
-                if (numberFromString >= 10 && numberFromString < 20) {
-                    insertNumberIntobingoTicket(1, numberFromString);
-                }
-                if (numberFromString >= 20 && numberFromString < 30) {
-                    insertNumberIntobingoTicket(2, numberFromString);
-                }
-                if (numberFromString >= 30 && numberFromString < 40) {
-                    insertNumberIntobingoTicket(3, numberFromString);
-                }
-                if (numberFromString >= 40 && numberFromString < 50) {
-                    insertNumberIntobingoTicket(4, numberFromString);
-                }
-                if (numberFromString >= 50 && numberFromString < 60) {
-                    insertNumberIntobingoTicket(5, numberFromString);
-                }
-                if (numberFromString >= 60 && numberFromString < 70) {
-                    insertNumberIntobingoTicket(6, numberFromString);
-                }
-                if (numberFromString >= 70 && numberFromString < 80) {
-                    insertNumberIntobingoTicket(7, numberFromString);
-                }
-                if (numberFromString >= 80 && numberFromString <= 90) {
-                    insertNumberIntobingoTicket(8, numberFromString);
-                }
+            me.getTicket = function (ticketArray) {
+                me.ticket = new BingoTicket();
+                me.ticket.fillTicket(ticketArray);
             };
         });
 })();

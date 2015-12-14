@@ -1,4 +1,4 @@
-<div ng-repeat="strip in game.bingo.bingoStrip">
+<!--<div ng-repeat="strip in game.bingo.bingoStrip">-->
     <div class="bingoBackground">
         <div class="gameboard gameboardPadding">
             <bingo-cell strip-row="0" strip-column="0"></bingo-cell>
@@ -31,9 +31,7 @@
             <bingo-cell strip-row="2" strip-column="7"></bingo-cell>
             <bingo-cell strip-row="2" strip-column="8"></bingo-cell>
         </div>
-        <div class="numbersLeft counterNumberSize">{{game.prizeNumbers.numbersToWin}}<br>
-
-            <div class="togofix">to go!</div>
+        <div class="numbersLeft counterNumberSize">{{game.bingo.ticket.getToGo()}}<br> <div class="togofix">to go!</div>
         </div>
     </div>
-</div>
+<!--</div>-->
