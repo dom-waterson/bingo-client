@@ -32,7 +32,17 @@
                 };
 
                 me.makeCall = function(call){
-                    //TODO: check cell in relevant column
+                    var col  = call / 10;
+                    if(Math.floor(col) < 9){
+                        if(me.cells[Math.floor(col)].bingoNumber === call){
+                            console.log("found match");
+                            me.cells[Math.floor(col)].called = true;
+                        }
+                    }else {
+                        if(me.cells[8].bingoNumber === call){
+                            me.cells[8].called = true;
+                        }
+                    }
                 };
 
                 me.isCalled = function(){
@@ -40,8 +50,9 @@
                 };
 
                 me.addNumber = function(number){
-                    if(number.charAt(0) !== '9'){
-                        me.cells[number.charAt(0)].addNumber(number);
+                    var col  = number / 10;
+                    if(Math.floor(col) < 9){
+                        me.cells[Math.floor(col)].addNumber(number);
                     } else {
                         me.cells[8].addNumber(number);
                     }
@@ -61,7 +72,10 @@
                 };
 
                 me.makeCall = function(call){
-                    //TODO: Iterate over lines, calling
+                    var line;
+                    for(line in me.lines){
+                        me.lines[line].makeCall(call);
+                    }
                 };
 
                 me.fillTicket = function(numbers){
@@ -69,7 +83,7 @@
                     for(row in numbers){
                         var string = numbers[row].toString();
                         for(var i = 0; i < 5; i++){
-                            me.lines[row].addNumber(string.slice(start,end));
+                            me.lines[row].addNumber(parseInt(string.slice(start,end)));
                             start += 2;
                             end += 2;
                         }
